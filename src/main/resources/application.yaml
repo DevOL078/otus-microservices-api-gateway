@@ -10,10 +10,10 @@ spring:
             allowedOrigins: "*"
             allowedHeaders: "*"
             allowedMethods: "*"
-#      httpclient:
-#        wiretap: true
-#      httpserver:
-#        wiretap: true
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
       routes:
         - id: user-service
           uri: ${user-service.url}
