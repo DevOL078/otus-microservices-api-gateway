@@ -14,10 +14,10 @@ import ru.oleynik.otus.api.gateway.out.dto.UserResponse
     configuration = [FeignConfig::class])
 interface UserServiceClient {
 
-    @PostMapping
+    @PostMapping("/auth")
     fun create(request: UserRequest): UserResponse
 
-    @GetMapping("/search")
+    @GetMapping("/auth/search")
     fun getByLoginAndPassword(
         @RequestParam("login") login: String,
         @RequestParam("password") password: String,
