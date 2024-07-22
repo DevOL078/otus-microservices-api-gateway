@@ -27,6 +27,37 @@ spring:
 user-service:
   url: http://localhost:8000
 
+auth.jwt:
+  private-key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDaveG5S6P85JZq
+    1R10NLurWpGuP+Fa4iZOmTymskR/f1nhR5fVL6Fdlev80/SQgQHYpUz7BwMwh0Ag
+    0joIi5jBw60e0UzRRV9hU/U5ZCuAVOZvm2l7gvOSCpZeV5OqquMEtsDIAcl5AD4J
+    W55SSKnq04q0PCxz6OVvNSzQ7kgCJo1d3TjuexXAZhEWyXGrZdXmmyFS4+T0NBRY
+    TV2YSHoeVNQaHJMj259ogSQoEZ8+349o02d5m8Fwv14zedaaP2lXbzUmQxPj6CsI
+    FIiuEBbcQKs2BWLBPGrRTwcqSvqE3xbK2xhT+3j/vjHwZQxuHcMRPkkZxWgpb4Ug
+    C55TguGJAgMBAAECggEAGd32gXkGbXOCriOBlipePwc4zwhS1/KCYS0R1QyjuQgQ
+    UumqdNVrGawO+hj+hNAcrcfucIkFwYlc9gSmRDht2gwPvuM1WFIB03qgNyc3Vbe0
+    gGI6eRalQxHpckKc/cOzkO0jowNDFgIHVAf3kvdw0IovjtzGzPYvm5UINbTX4xj/
+    69QAV/BCSBvoSPbfk2aDJpI0eQPuSm+uBiXEZM+VBP1xOeCwA6ZUqqRDhn271JWS
+    9igaY+LrvubNKrx5poIhAeWkkoORX8Y7eUEMlZbi+KU1UnwDbo/52L7Hz2qMPl26
+    vNkAYT92pJegaoKQ9ALyGtvGkNORBb5JMIGwOXTSAQKBgQD8wBfsonJyN3LuNkIL
+    6oqJvjrumedxYm/AQr+TaVaiJ+bOlRN6waxKNpI3Pa6iKNRstfB1cophiy3nB7wP
+    xIdx0pCdu1kaNtBtZzr7dPjVpSqMAnZnuSUOWnQAuNvDnQWJIoj2PbKSPc2Xhuhs
+    XzYCtbrufratQdjLPj8giTKi4QKBgQDdjdoJYCncqyo4lWASPR7+05H57tC9WfGA
+    WmZlvwg+vXeHGDrpVZ8JlcrIW2GoHdvZLYh8KzpYxISUpqIVOI708Q/LRenH4p40
+    9TJp7GhMIZwJJWBoallHsjoS21LzObRjfUFg1xDyx4vjNeyOZmDHGj7MSGgN54up
+    mp5Jwnu7qQKBgAp3ggYgrBCizzWiNZX8voP5xsL+yKDfbLVPjlNyd037zQkdD1N0
+    Fch0/hUfjs3UVwexeSXD+osTknEQ1u7oOpuyFp8RlR0KzBLbxYuISo2+a0alC3Y8
+    KpavlEI7ZY5yQDpvnbBk2bJIsOznf1SNlNUD5Zvez33ZTjsMdtzIEbrBAoGAeXYg
+    F83BhXnNHtI9piIeEQQ6XjQf+f8KWBy3UIaHZaYHlmehPHS1SNL3Jhp7Emi0M38z
+    +SbVyP6L1Nb5uvqT3RMfXoiInw3NQClApzN1Bm/SlG0KSpQrOBQspFPbSP7Ut0pf
+    AlFFuGPPfBP/CR51ZhIsZWA4s47CUYwzxSo7HWkCgYEAvD/MXZJCDWVXZUIu0yXu
+    9vlLn/jZtRubWSYbeYyO+xwbxPra+v/IJvAAUnPdzml69BNgXRS3etfVFiG+TLzX
+    CRk3aGjGRZNmir/mKwIE1vIei4U8MENZCLatbRirtX+iGehJNKFNuDNDtTtHQcBn
+    9dAYQraPhzrAkO2v/bfjXuI=
+    -----END PRIVATE KEY-----
+
 management:
   endpoints:
     web:
