@@ -12,9 +12,10 @@ class JwtService(
     private val jwtConfig: JwtConfig,
 ) {
 
-    fun generateToken(login: String): String {
+    fun generateToken(login: String, userId: Long): String {
         return Jwts.builder()
             .subject(login)
+            .claim(USER_ID_CLAIM, userId)
             .issuedAt(Date())
             .expiration(Date(System.currentTimeMillis() + 60 * 60 * 1000 * EXPIRATION_HOURS))
             .signWith(jwtConfig.privateKey)
@@ -34,6 +35,7 @@ class JwtService(
 
     private companion object {
         const val EXPIRATION_HOURS = 5
+        const val USER_ID_CLAIM = "userId"
     }
 
 }

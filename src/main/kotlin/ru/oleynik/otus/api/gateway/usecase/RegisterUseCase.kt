@@ -14,9 +14,10 @@ class RegisterUseCase(
 ) {
 
     fun exec(request: RegisterRequest): AuthResponse {
+        val userId = userServiceClient.create(request.toUserRequest()).id
         return AuthResponse(
-            userServiceClient.create(request.toUserRequest()).id,
-            jwtService.generateToken(request.username))
+            userId,
+            jwtService.generateToken(request.username, userId))
     }
 
 }

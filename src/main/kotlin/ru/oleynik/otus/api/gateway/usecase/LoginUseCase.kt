@@ -14,7 +14,7 @@ class LoginUseCase(
     fun exec(request: LoginRequest): AuthResponse {
         val users = userServiceClient.getByLoginAndPassword(request.username, request.password)
         return users.firstOrNull()?.let {
-            AuthResponse(it.id, jwtService.generateToken(request.username))
+            AuthResponse(it.id, jwtService.generateToken(request.username, it.id))
         } ?: throw IllegalStateException("login or password is invalid")
     }
 }
