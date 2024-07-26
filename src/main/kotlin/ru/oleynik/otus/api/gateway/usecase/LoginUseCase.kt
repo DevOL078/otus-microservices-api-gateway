@@ -12,9 +12,9 @@ class LoginUseCase(
     private val jwtService: JwtService,
 ) {
     fun exec(request: LoginRequest): AuthResponse {
-        val users = userServiceClient.getByLoginAndPassword(request.username, request.password)
-        return users.firstOrNull()?.let {
+        val user = userServiceClient.getByLoginAndPassword(request.username, request.password)
+        return user.let {
             AuthResponse(it.id, jwtService.generateToken(request.username, it.id))
-        } ?: throw IllegalStateException("login or password is invalid")
+        }
     }
 }

@@ -1,4 +1,4 @@
-server.port: 8090
+server.port: 8000
 
 spring:
   application.name: api-gateway
@@ -25,7 +25,7 @@ spring:
             - AuthFilter
 
 user-service:
-  url: http://localhost:8000
+  url: http://backend-app
 
 auth.jwt:
   private-key: |

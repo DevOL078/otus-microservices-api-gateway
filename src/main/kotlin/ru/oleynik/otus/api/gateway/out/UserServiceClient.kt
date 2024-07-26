@@ -21,6 +21,6 @@ interface UserServiceClient {
     fun getByLoginAndPassword(
         @RequestParam("login") login: String,
         @RequestParam("password") password: String,
-    ): List<UserResponse>
+    ): UserResponse
 
 }
