@@ -1,0 +1,8 @@
+@startuml
+
+actor Client as ClientActor
+boundary "Api-Gateway Service" as ApiGatewayService
+entity "Backend-App Service" as BackendAppService
+database "Users DB" as UsersDB
+
+@enduml

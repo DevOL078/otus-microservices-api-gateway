@@ -1,0 +1,24 @@
+@startuml
+
+!include objects.puml
+
+hide footbox
+title Edit profile
+
+ClientActor -> ApiGatewayService: PUT /users/profile/{userId} \n + updated data \n + access token
+ApiGatewayService -> ApiGatewayService: check access token \n by private RSA key
+ApiGatewayService -> BackendAppService: PUT /profile/{userId} \n + updated data \n + access token
+BackendAppService -> BackendAppService: check access token \n by public RSA key
+BackendAppService -> BackendAppService: check user id from token \n and profile id
+
+alt ids are equaled
+    BackendAppService -> UsersDB: select user by id
+    BackendAppService -> UsersDB: update user by id
+    BackendAppService --> ApiGatewayService: (200)
+    ApiGatewayService --> ClientActor: (200)
+else ids are not equaled
+    BackendAppService --> ApiGatewayService: access denied (403)
+    ApiGatewayService --> ClientActor: access denied (403)
+end
+
+@enduml

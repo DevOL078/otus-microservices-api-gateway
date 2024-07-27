@@ -1,0 +1,27 @@
+@startuml
+
+!include objects.puml
+
+hide footbox
+title Login
+
+ClientActor -> ApiGatewayService: POST /login
+ApiGatewayService -> BackendAppService: POST /auth/search
+BackendAppService -> UsersDB: select by username
+
+alt user was found
+    alt password is correct
+        BackendAppService -> BackendAppService: check password
+        BackendAppService --> ApiGatewayService: user data (200)
+        ApiGatewayService --> ClientActor: user id with \n access token (200)
+    else password is invalid
+        BackendAppService --> ApiGatewayService: user not found (404)
+        ApiGatewayService --> ClientActor: user not found (404)
+    end
+else user was not found
+    UsersDB --> BackendAppService: user was found
+    BackendAppService --> ApiGatewayService: user not found (404)
+    ApiGatewayService --> ClientActor: user not found (404)
+end
+
+@enduml

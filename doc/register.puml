@@ -1,0 +1,21 @@
+@startuml
+
+!include objects.puml
+
+hide footbox
+title Register
+
+ClientActor -> ApiGatewayService: POST /register
+ApiGatewayService -> BackendAppService: POST /auth/create
+BackendAppService -> UsersDB: select by username
+
+alt user was not found
+    BackendAppService -> UsersDB: insert new user
+    BackendAppService --> ApiGatewayService: user data (200)
+    ApiGatewayService --> ClientActor: user id with \n access token (200)
+else user was found
+    BackendAppService --> ApiGatewayService: user found (409)
+    ApiGatewayService --> ClientActor: user found (409)
+end
+
+@enduml
