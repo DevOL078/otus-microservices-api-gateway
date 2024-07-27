@@ -1,0 +1,617 @@
+{
+	"info": {
+		"_postman_id": "5da7f9f0-2ae7-49b2-941a-364c3790bd96",
+		"name": "OTUS. HW-api-gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6889535"
+	},
+	"item": [
+		{
+			"name": "register-1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var login = \"\";\r",
+							"for (let i = 0; i < 15; i++) {\r",
+							"    login += pm.variables.replaceIn(\"{{$randomAlphaNumeric}}\");\r",
+							"}\r",
+							"pm.collectionVariables.set(\"user1Login\", login);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonResponse = pm.response.json();\r",
+							"pm.collectionVariables.set(\"userId1\", jsonResponse.userId);\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user1Login}}\",\r\n    \"password\": \"111\",\r\n    \"firstName\": \"Ivan\",\r\n    \"lastName\": \"Ivanov\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"phone\": \"88889994433\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/auth/register",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-profile-without-token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-profile-without-token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user1Login}}\",\r\n    \"password\": \"1\",\r\n    \"firstName\": \"Ivan11111\",\r\n    \"lastName\": \"Ivanov\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"phone\": \"88889994433\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login-1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = pm.response.json();\r",
+							"pm.collectionVariables.set(\"token1\", jsonResponse.accessToken);\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user1Login}}\",\r\n    \"password\": \"111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-profile-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user1Login}}\",\r\n    \"password\": \"111\",\r\n    \"firstName\": \"Ivan11111\",\r\n    \"lastName\": \"Ivanov11111\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"phone\": \"88889994433\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-profile-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check updated firstName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Ivan11111\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check updated lastName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"Ivanov11111\");\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var login = \"\";\r",
+							"for (let i = 0; i < 15; i++) {\r",
+							"    login += pm.variables.replaceIn(\"{{$randomAlphaNumeric}}\");\r",
+							"}\r",
+							"pm.collectionVariables.set(\"user2Login\", login);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonResponse = pm.response.json();\r",
+							"pm.collectionVariables.set(\"userId2\", jsonResponse.userId);\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user2Login}}\",\r\n    \"password\": \"222\",\r\n    \"firstName\": \"Petr\",\r\n    \"lastName\": \"Petrov\",\r\n    \"email\": \"petrov@mail.ru\",\r\n    \"phone\": \"2222244411122\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/auth/register",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login-2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = pm.response.json();\r",
+							"pm.collectionVariables.set(\"token2\", jsonResponse.accessToken);\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text() ? pm.response.json() : null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user2Login}}\",\r\n    \"password\": \"222\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-profile-1-with-user-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-profile-1-with-user-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Request\");\r",
+							"console.log(pm.request.body && pm.request.body.raw\r",
+							"    ? JSON.parse(pm.request.body.raw)\r",
+							"    : null);\r",
+							"console.log(\"Response\");\r",
+							"console.log(pm.response.text());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{user1Login}}\",\r\n    \"password\": \"111\",\r\n    \"firstName\": \"Ivan11111222\",\r\n    \"lastName\": \"Ivanov\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"phone\": \"88889994433\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/users/profile/{{userId1}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"{{userId1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "userId1",
+			"value": ""
+		},
+		{
+			"key": "token1",
+			"value": ""
+		},
+		{
+			"key": "userId2",
+			"value": ""
+		},
+		{
+			"key": "token2",
+			"value": ""
+		},
+		{
+			"key": "user1Login",
+			"value": ""
+		},
+		{
+			"key": "user2Login",
+			"value": ""
+		}
+	]
+}
