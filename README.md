@@ -37,6 +37,9 @@ helm upgrade --install api-gateway ./k8s/helm/api-gateway
 minikube tunnel
 ```
 
+### Docker-образ
+https://hub.docker.com/repository/docker/dmoleynik0307/api-gateway/general
+
 ### Helm-chart
 1. Deployment - [deployment.yaml](k8s%2Fhelm%2Fapi-gateway%2Ftemplates%2Fdeployment.yaml)
 2. Service - [service.yaml](k8s%2Fhelm%2Fapi-gateway%2Ftemplates%2Fservice.yaml)
