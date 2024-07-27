@@ -56,6 +56,14 @@ Response (200):
 }
 ```
 
+### Тестирование при помощи newman
+Команда для запуска тестовых сценариев при помощи утилиты [newman](https://www.npmjs.com/package/newman):
+```
+newman run ./postman/postman_collection.json -e ./postman/postman_environment.json
+```
+Также файлы [postman_collection.json](postman%2Fpostman_collection.json) и [postman_environment.json](postman%2Fpostman_environment.json)
+можно использовать для импорта коллекции запросов и окружения в [Postman](https://www.postman.com/)
+
 ### Access token
 Для генерации токена используется пара RSA ключей (приватный и публичный).
 
